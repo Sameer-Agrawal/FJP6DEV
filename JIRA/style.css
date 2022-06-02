@@ -1,0 +1,26 @@
+*{
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+
+.toolbox-cont{
+    height: 5rem;
+    background-color: bisque;
+    display: flex;
+    align-items: center;
+}
+
+.toolbox-priority-cont{
+    height: 3rem;
+    width: 18rem;
+    background-color: aqua;
+    margin-left: 5rem;
+}
+
+.action-btn-cont{
+    height: 3rem;
+    width: 10rem;
+    background-color: aqua;
+    margin-left: 5rem;
+}
