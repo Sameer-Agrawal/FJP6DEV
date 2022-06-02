@@ -6,7 +6,7 @@
 
 .toolbox-cont{
     height: 5rem;
-    background-color: bisque;
+    background-color: rgb(255, 255, 182);
     display: flex;
     align-items: center;
 }
@@ -14,13 +14,48 @@
 .toolbox-priority-cont{
     height: 3rem;
     width: 18rem;
-    background-color: aqua;
+    background-color: beige;
     margin-left: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .action-btn-cont{
     height: 3rem;
     width: 10rem;
-    background-color: aqua;
+    background-color: beige;
     margin-left: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.color{
+    height: 1.5rem;
+    width: 3rem;
+}
+
+.lightPink{
+    background-color: lightPink;
+}
+
+.lightBlue{
+    background-color: lightBlue;
+}
+
+.lightGreen{
+    background-color: lightGreen;
+}
+
+.black{
+    background-color: black;
+}
+
+.add-btn{
+    font-size: 1.5rem;
+}
+
+.remove-btn{
+    font-size: 1.5rem;
 }
