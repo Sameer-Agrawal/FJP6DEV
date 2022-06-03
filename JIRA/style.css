@@ -97,6 +97,10 @@
     height: 4rem;
 }
 
+.active{
+    border: 3px solid red;
+}
+
 .main-cont{
     display: flex;
     justify-content: space-evenly;
@@ -112,7 +116,7 @@
 }
 
 .ticket-color{
-    background-color: lightseagreen;
+    /* background-color: lightseagreen; */
     height: 1.35rem;
 }
 
