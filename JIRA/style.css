@@ -61,12 +61,15 @@
 }
 
 .model-cont{
+    position: absolute;
+    top: 25vh;
+    left: 25vw;
     height: 50vh;
     width: 50vw;
     background-color: beige;
     display: none;
-    margin-left: 30rem;
-    margin-top: 10rem;
+    /* margin-left: 30rem;
+    margin-top: 10rem; */
 }
 
 .textarea-cont{
@@ -92,4 +95,32 @@
 .priority-color{
     width: 6.5rem;
     height: 4rem;
+}
+
+.main-cont{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    /* gap: 3rem; */
+}
+
+.ticket-cont{
+    height: 13rem;
+    width: 17rem;
+    background-color: beige;
+    margin: 2.5rem;
+}
+
+.ticket-color{
+    background-color: lightseagreen;
+    height: 1.35rem;
+}
+
+.ticket-id{
+    height: 1.75rem;
+    background-color: lightyellow
+}
+
+.task-area{
+
 }
