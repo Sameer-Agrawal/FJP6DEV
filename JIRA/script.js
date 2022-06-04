@@ -15,38 +15,46 @@ let selectedColor = colors[colors.length - 1];
 
 // Handling the filter functionality
 for (let i = 0; i < filters.length; i++) {
-    let choosenFilter = filters[i];
-    choosenFilter.addEventListener("click", function(){
-        // Lets create the filtered array
-        let choosenColor = choosenFilter.classList[1];
-        let filteredArr = [];
-        for(let i=0; i<ticketArr.length; i++) {
-            if(ticketArr[i].ticketColor == choosenColor){
-                filteredArr.push(ticketArr[i])
-            }
-        }
-        // Removing all the tickets before filtration
-        let allTickets = document.querySelectorAll(".ticket-cont")
-        for(let i=0; i<allTickets.length; i++){
-            allTickets[i].remove();
-        }
-        // Creating the tickets using filtered array
-        for(let i=0; i<filteredArr.length; i++) {
-            createTicket(filteredArr[i].ticketContent, filteredArr[i].ticketColor, filteredArr[i].ticketId);
-        }
-    })
+  let choosenFilter = filters[i];
+  choosenFilter.addEventListener("click", function () {
+    // Lets create the filtered array
+    let choosenColor = choosenFilter.classList[1];
+    let filteredArr = [];
+    for (let i = 0; i < ticketArr.length; i++) {
+      if (ticketArr[i].ticketColor == choosenColor) {
+        filteredArr.push(ticketArr[i]);
+      }
+    }
+    // Removing all the tickets before filtration
+    let allTickets = document.querySelectorAll(".ticket-cont");
+    for (let i = 0; i < allTickets.length; i++) {
+      allTickets[i].remove();
+    }
+    // Creating the tickets using filtered array
+    for (let i = 0; i < filteredArr.length; i++) {
+      createTicket(
+        filteredArr[i].ticketContent,
+        filteredArr[i].ticketColor,
+        filteredArr[i].ticketId
+      );
+    }
+  });
 
-    choosenFilter.addEventListener("dblclick", function(){
-        // Removing all the tickets before filtration
-        let allTickets = document.querySelectorAll(".ticket-cont")
-        for(let i=0; i<allTickets.length; i++){
-            allTickets[i].remove();
-        }
+  choosenFilter.addEventListener("dblclick", function () {
+    // Removing all the tickets before filtration
+    let allTickets = document.querySelectorAll(".ticket-cont");
+    for (let i = 0; i < allTickets.length; i++) {
+      allTickets[i].remove();
+    }
 
-        for(let i=0; i<ticketArr.length; i++) {
-            createTicket(ticketArr[i].ticketContent, ticketArr[i].ticketColor, ticketArr[i].ticketId);
-        }
-    })
+    for (let i = 0; i < ticketArr.length; i++) {
+      createTicket(
+        ticketArr[i].ticketContent,
+        ticketArr[i].ticketColor,
+        ticketArr[i].ticketId
+      );
+    }
+  });
 }
 
 addBtn.addEventListener("click", function (e) {
@@ -113,6 +121,8 @@ function createTicket(task, priorityColor, ticketID) {
   ticketCont.addEventListener("click", function () {
     if (removeFlag) {
       ticketCont.remove();
+      let selectedIdx = getIdx(Id);
+      ticketArr.splice(selectedIdx, 1);
     }
   });
 
@@ -129,6 +139,9 @@ function createTicket(task, priorityColor, ticketID) {
       lockUnlockBtn.classList.add("fa-lock");
       taskAreaCont.setAttribute("contenteditable", "false");
     }
+    //Updating ticket array
+    let selectedIdx = getIdx(Id);
+    ticketArr[selectedIdx].ticketContent = taskAreaCont.textContent;
   });
 
   // Adding Priority Color Change Functionality
@@ -147,6 +160,10 @@ function createTicket(task, priorityColor, ticketID) {
     let nextColor = colors[nextColorIdx];
     priorityColorBand.classList.remove(currentlySelectedColor);
     priorityColorBand.classList.add(nextColor);
+
+    //Updating ticket array
+    let selectedIdx = getIdx(Id);
+    ticketArr[selectedIdx].ticketColor = nextColor;
   });
   // Here we have successfully stored tickets in form of an object
   if (ticketID == undefined) {
@@ -156,5 +173,14 @@ function createTicket(task, priorityColor, ticketID) {
       ticketId: Id,
     });
   }
-  console.log(ticketArr);
+  //   console.log(ticketArr);
+}
+
+
+function getIdx(Id){
+    for (let i = 0; i < ticketArr.length; i++) {
+        if (Id == ticketArr[i].ticketId) {
+          return i;
+        }
+      }
 }
