@@ -7,7 +7,47 @@ let colors = ["lightPink", "lightBlue", "lightGreen", "black"];
 let removeBtn = document.querySelector(".remove-btn");
 let removeFlag = false;
 let addModel = true;
+var uid = new ShortUniqueId();
+let filters = document.querySelectorAll(".color");
+//Creating an empty array in which we will add the tickets info!
+let ticketArr = [];
 let selectedColor = colors[colors.length - 1];
+
+// Handling the filter functionality
+for (let i = 0; i < filters.length; i++) {
+    let choosenFilter = filters[i];
+    choosenFilter.addEventListener("click", function(){
+        // Lets create the filtered array
+        let choosenColor = choosenFilter.classList[1];
+        let filteredArr = [];
+        for(let i=0; i<ticketArr.length; i++) {
+            if(ticketArr[i].ticketColor == choosenColor){
+                filteredArr.push(ticketArr[i])
+            }
+        }
+        // Removing all the tickets before filtration
+        let allTickets = document.querySelectorAll(".ticket-cont")
+        for(let i=0; i<allTickets.length; i++){
+            allTickets[i].remove();
+        }
+        // Creating the tickets using filtered array
+        for(let i=0; i<filteredArr.length; i++) {
+            createTicket(filteredArr[i].ticketContent, filteredArr[i].ticketColor, filteredArr[i].ticketId);
+        }
+    })
+
+    choosenFilter.addEventListener("dblclick", function(){
+        // Removing all the tickets before filtration
+        let allTickets = document.querySelectorAll(".ticket-cont")
+        for(let i=0; i<allTickets.length; i++){
+            allTickets[i].remove();
+        }
+
+        for(let i=0; i<ticketArr.length; i++) {
+            createTicket(ticketArr[i].ticketContent, ticketArr[i].ticketColor, ticketArr[i].ticketId);
+        }
+    })
+}
 
 addBtn.addEventListener("click", function (e) {
   if (addModel) {
@@ -53,12 +93,19 @@ removeBtn.addEventListener("click", function () {
   removeFlag = !removeFlag;
 });
 
-function createTicket(task, priorityColor) {
+function createTicket(task, priorityColor, ticketID) {
+  let Id;
+  if (ticketID == undefined) {
+    Id = uid();
+  } else {
+    Id = ticketID;
+  }
   let ticketCont = document.createElement("div");
   ticketCont.setAttribute("class", "ticket-cont");
   ticketCont.innerHTML = `<div class="ticket-color ${priorityColor}"></div>
-                            <div class="ticket-id">#qu123</div>
-                            <div class="task-area">${task}</div>`;
+                            <div class="ticket-id">#${Id}</div>
+                            <div class="task-area">${task}</div>
+                            <div class="lock-unlock"><i class="fa fa-lock"></i></div>`;
   mainCont.appendChild(ticketCont);
   // console.log(priorityColor)
 
@@ -66,6 +113,21 @@ function createTicket(task, priorityColor) {
   ticketCont.addEventListener("click", function () {
     if (removeFlag) {
       ticketCont.remove();
+    }
+  });
+
+  // Handling lock-unlock functionality
+  let lockUnlockBtn = ticketCont.querySelector(".lock-unlock i");
+  let taskAreaCont = ticketCont.querySelector(".task-area");
+  lockUnlockBtn.addEventListener("click", function () {
+    if (lockUnlockBtn.classList.contains("fa-lock")) {
+      lockUnlockBtn.classList.remove("fa-lock");
+      lockUnlockBtn.classList.add("fa-unlock");
+      taskAreaCont.setAttribute("contenteditable", "true");
+    } else {
+      lockUnlockBtn.classList.remove("fa-unlock");
+      lockUnlockBtn.classList.add("fa-lock");
+      taskAreaCont.setAttribute("contenteditable", "false");
     }
   });
 
@@ -86,4 +148,13 @@ function createTicket(task, priorityColor) {
     priorityColorBand.classList.remove(currentlySelectedColor);
     priorityColorBand.classList.add(nextColor);
   });
+  // Here we have successfully stored tickets in form of an object
+  if (ticketID == undefined) {
+    ticketArr.push({
+      ticketColor: priorityColor,
+      ticketContent: task,
+      ticketId: Id,
+    });
+  }
+  console.log(ticketArr);
 }

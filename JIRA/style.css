@@ -106,7 +106,7 @@ body{
 }
 
 .active{
-    border: 3px solid red;
+    border: 3px solid #85586F;
 }
 
 .main-cont{
@@ -139,4 +139,15 @@ body{
 .task-area{
     padding: 4px;
     font-size: 1.75rem;
+    overflow: auto;
+    word-break: break-all;
+    outline: none;
+    height: 8rem;
+}
+
+.lock-unlock{
+    font-size: 1.75rem;
+    /* position: relative; */
+    /* top: 5.2rem; */
+    margin-left: 15.2rem;
 }
