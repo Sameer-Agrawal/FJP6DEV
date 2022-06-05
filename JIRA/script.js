@@ -13,6 +13,16 @@ let filters = document.querySelectorAll(".color");
 let ticketArr = [];
 let selectedColor = colors[colors.length - 1];
 
+//Refresh Handling Functionality
+if(localStorage.getItem("tickets")){
+    let str = localStorage.getItem("tickets");
+    let arr = JSON.parse(str);
+    ticketArr = arr;
+    for(let i = 0; i < arr.length; i++){
+        createTicket(arr[i].ticketContent, arr[i].ticketColor, arr[i].ticketId)
+    }
+}
+
 // Handling the filter functionality
 for (let i = 0; i < filters.length; i++) {
   let choosenFilter = filters[i];
@@ -124,6 +134,7 @@ function createTicket(task, priorityColor, ticketID) {
       let selectedIdx = getIdx(Id);
       ticketArr.splice(selectedIdx, 1);
     }
+    updateLocalStorage();
   });
 
   // Handling lock-unlock functionality
@@ -142,6 +153,7 @@ function createTicket(task, priorityColor, ticketID) {
     //Updating ticket array
     let selectedIdx = getIdx(Id);
     ticketArr[selectedIdx].ticketContent = taskAreaCont.textContent;
+    updateLocalStorage()
   });
 
   // Adding Priority Color Change Functionality
@@ -164,6 +176,7 @@ function createTicket(task, priorityColor, ticketID) {
     //Updating ticket array
     let selectedIdx = getIdx(Id);
     ticketArr[selectedIdx].ticketColor = nextColor;
+    updateLocalStorage();
   });
   // Here we have successfully stored tickets in form of an object
   if (ticketID == undefined) {
@@ -172,8 +185,9 @@ function createTicket(task, priorityColor, ticketID) {
       ticketContent: task,
       ticketId: Id,
     });
+    updateLocalStorage();
   }
-  //   console.log(ticketArr);
+    // console.log(ticketArr);
 }
 
 
@@ -183,4 +197,9 @@ function getIdx(Id){
           return i;
         }
       }
+}
+
+function updateLocalStorage(){
+    let StringifyArr = JSON.stringify(ticketArr);
+    localStorage.setItem("tickets",StringifyArr);
 }
