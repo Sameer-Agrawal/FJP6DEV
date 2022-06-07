@@ -1,0 +1,83 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.menu-options{
+    border: 0.5px solid;
+    height: 30px;
+}
+
+.address-content{
+    border: 0.5px solid;
+    height: 30px;
+}
+
+.cells-content{
+    border: 0.5px solid;
+    height: calc(100vh - 90px);
+    overflow: auto;
+}
+
+.sheets{
+    border: 0.5px solid;
+    height: 30px;
+}
+
+.row{
+    display: flex;
+}
+
+.cell{
+    border: 0.25px solid;
+    height: 30px;
+    width: 90px;
+}
+
+.top-left-cell{
+    border: 0.25px solid;
+    height: 30px;
+    width: 35px;
+    position: absolute;
+    top: 60px;
+    left: 0px;
+}
+
+.top-row{
+    position: absolute;
+    top: 60px;
+    left: 35px;
+    display: flex;
+    
+}
+
+.top-row-cells{
+    border: 0.25px solid;
+    height: 30px;
+    width: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.left-col{
+    position: absolute;
+    top: 90px;
+    left: 0px;
+}
+
+.left-col-cells{
+    border: 0.25px solid;
+    height: 30px;
+    width: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.editable-cells{
+    position: absolute;
+    top: 90px;
+    left: 35px;
+}
