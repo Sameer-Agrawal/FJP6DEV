@@ -18,6 +18,7 @@
     border: 0.5px solid;
     height: calc(100vh - 90px);
     overflow: auto;
+    position: relative;
 }
 
 .sheets{
@@ -40,16 +41,19 @@
     height: 30px;
     width: 35px;
     position: absolute;
-    top: 60px;
+    top: 0px;
     left: 0px;
+    z-index: 5;
+    background-color: lavenderblush;
 }
 
 .top-row{
     position: absolute;
-    top: 60px;
+    top: 0px;
     left: 35px;
     display: flex;
-    
+    z-index: 3;
+    background-color: lavenderblush;
 }
 
 .top-row-cells{
@@ -63,8 +67,10 @@
 
 .left-col{
     position: absolute;
-    top: 90px;
+    top: 30px;
     left: 0px;
+    z-index: 3;
+    background-color: lavenderblush;
 }
 
 .left-col-cells{
@@ -78,6 +84,6 @@
 
 .editable-cells{
     position: absolute;
-    top: 90px;
+    top: 30px;
     left: 35px;
 }
