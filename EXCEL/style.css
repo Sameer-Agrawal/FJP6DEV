@@ -34,6 +34,7 @@
     border: 0.25px solid;
     height: 30px;
     width: 90px;
+    outline: none;
 }
 
 .top-left-cell{
