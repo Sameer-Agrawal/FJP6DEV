@@ -38,6 +38,7 @@ for(let i=0;i<allCells.length;i++){
         }
         cellObject.value = cellValue;
         console.log("After UPdate",cellObject);
+        updateChildren(cellObject);
     })
 }
 // lastSelectedCell
@@ -80,6 +81,22 @@ function getRowIdColIdFromAddress(address){
     }
 }
 
+// Updating the values of childrens
+function updateChildren(cellObject){
+    for(let i=0; i<cellObject.children.length; i++){
+        let childName = cellObject.children[i];
+        let {rowId, colId} = getRowIdColIdFromAddress(childName);
+        let childCellObj = db[rowId][colId];
+        let newValue = solveFormula(childCellObj.formula);
+        // Lets update database
+        childCellObj.value = newValue;
+        // Lets update UI
+        let cellUI = document.querySelector(`div[rowid='${rowId}'][colid='${colId}']`);
+        cellUI.textContent = newValue;
+        updateChildren(childCellObj);
+    }
+}
+
 function solveFormula(formula,selfCellObject){
     //formula = (A1 + B2 + 2 - C3)
     let formulaComps = formula.split(" ");
@@ -90,9 +107,10 @@ function solveFormula(formula,selfCellObject){
             let {rowId,colId} = getRowIdColIdFromAddress(formulaComp);
             let cellObject = db[rowId][colId];
             let value = cellObject.value;
-            cellObject.children.push(selfCellObject.name);
-            console.log(cellObject);
-            console.log(cellObject);
+            if(selfCellObject)
+                cellObject.children.push(selfCellObject.name);
+            // console.log(cellObject);
+            // console.log(cellObject);
             formula = formula.replace(formulaComp,value);
         }
     }
