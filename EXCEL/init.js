@@ -1,54 +1,55 @@
-// All the functions that will run on initialization of web page!
+let cellsContentDiv = document.querySelector(".cells-content");
 
-let cellsContent = document.querySelector(".cells-content");
+
+function initCells(){
+    let cellsContent = "<div class='top-left-cell'></div>";
+    //top-row
+    cellsContent+="<div class='top-row'>"
+    for(let i=0;i<26;i++){
+        cellsContent+=`<div class='top-row-cell'>${String.fromCharCode(65+i)}</div>`;
+    }
+    cellsContent+="</div>"
+
+    //left-col
+    cellsContent+="<div class='left-col'>"
+    for(let i=0;i<100;i++){
+        cellsContent+=`<div class='left-col-cell'>${i+1}</div>`
+    }
+    cellsContent+="</div>"
+    cellsContent+="<div class='cells'>"
+    for(let i=0;i<100;i++){
+        cellsContent+="<div class = 'row'>";
+        //column
+        for(let j=0;j<26;j++){
+            cellsContent+=`<div class = 'cell' rowid='${i}' colid='${j}' contentEditable></div>`
+        }
+        cellsContent+="</div>"
+    }
+    cellsContent+="</div>"
+    cellsContentDiv.innerHTML = cellsContent;
+}
+
+initCells();
+
 let db;
 
-cellCreator();
-createDb();
+function initDb(){
+    db = [];
+    for(let i=0;i<100;i++){
+        let row = [];
+        for(let j=0;j<26;j++){
+            let name = String.fromCharCode(65+j)+(i+1)+"";
+            let cellObject = {
+                name:name,
+                value:"",
+                formula:"",
+                children:[]
+            }
+            row.push(cellObject);
+        }
+        db.push(row);
+    }
+}
+initDb();
+
 console.log(db);
-
-function cellCreator(){
-    let structure = "<div class='top-left-cell'></div>";
-    // Top-row
-    structure += "<div class='top-row'>"
-    for(let count=0; count<26; count++){
-        structure += `<div class='top-row-cells'>${String.fromCharCode(65+count)}</div>`
-    }
-    structure += "</div>"
-    // Left-col
-    structure += "<div class='left-col'>"
-    for(let count=0; count<100; count++){
-        structure += `<div class='left-col-cells'>${count+1}</div>`
-    }
-    structure += "</div>"
-    // Excel-cells
-    structure += "<div class='editable-cells'>"
-    for(let row=0; row<100; row++){  // Creating 100 rows
-        structure += "<div class='row'>";
-        for(let col=0; col<26; col++){  // Creating 100 columns
-            structure += `<div class='cell' colId='${col}' rowId='${row}' contentEditable></div>`
-        }
-        structure += "</div>";
-    }
-    structure += "</div>"
-    cellsContent.innerHTML = structure;
-}
-
-
-function createDb(){
-    db=[];
-    for(let row=0; row<100; row++){
-        let rowArr = [];
-        for(let col=0; col<26; col++){
-            let name = String.fromCharCode(65+col)+(row+1)+"";
-            let cellObj = {
-                name: name,
-                value: "",
-                formula: ""
-            };
-            rowArr.push(cellObj);
-        }
-        db.push(rowArr);
-    }
-}
-

@@ -1,5 +1,5 @@
 *{
-    margin: 0px;
+    margin: 0px;   
     padding: 0px;
     box-sizing: border-box;
 }
@@ -15,8 +15,8 @@
 }
 
 .cells-content{
-    border: 0.5px solid;
-    height: calc(100vh - 90px);
+    height:85vh;
+    background-color: aquamarine;
     overflow: auto;
     position: relative;
 }
@@ -31,67 +31,66 @@
 }
 
 .cell{
-    border: 0.25px solid;
-    height: 30px;
-    width: 90px;
+    border: 0.2px solid;
+    min-height: 30px;
+    width: 100px;
     outline: none;
 }
 
 .top-left-cell{
-    border: 0.25px solid;
+    border-right: 0.1px solid;
+    border-bottom: 0.1px solid;
     height: 30px;
-    width: 35px;
+    width: 30px;
+    background-color: grey;
     position: absolute;
-    top: 0px;
-    left: 0px;
-    z-index: 5;
-    background-color: lavenderblush;
+    z-index: 2;
+
 }
 
 .top-row{
-    position: absolute;
-    top: 0px;
-    left: 35px;
     display: flex;
-    z-index: 3;
-    background-color: lavenderblush;
+    position: absolute;
+    background-color: grey;
+    left: 30px;
+    z-index: 1;
 }
 
-.top-row-cells{
-    border: 0.25px solid;
+.top-row-cell{
     height: 30px;
-    width: 90px;
+    width: 100px;
+    border-bottom: 0.1px solid;
+    border-left: 0.1px solid;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .left-col{
+    background-color: grey;
     position: absolute;
-    top: 30px;
     left: 0px;
-    z-index: 3;
-    background-color: lavenderblush;
+    top:30px;
+    z-index: 1;
 }
 
-.left-col-cells{
-    border: 0.25px solid;
+.left-col-cell{
     height: 30px;
-    width: 35px;
+    width: 30px;
+    border-bottom: 0.1px solid;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.editable-cells{
+.cells{
     position: absolute;
-    top: 30px;
-    left: 35px;
+    top:30px;
+    left:30px;
 }
 
-.address{
-    height: 30px;
-    width: 60px;
-    font-size: large;
+#address{
     text-align: center;
+    font-size: large;
+    width: 60px;
 }
