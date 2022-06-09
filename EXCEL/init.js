@@ -26,7 +26,7 @@ function cellCreator(){
     for(let row=0; row<100; row++){  // Creating 100 rows
         structure += "<div class='row'>";
         for(let col=0; col<26; col++){  // Creating 100 columns
-            structure += "<div class='cell' contentEditable></div>"
+            structure += `<div class='cell' colId='${col}' rowId='${row}' contentEditable></div>`
         }
         structure += "</div>";
     }
@@ -43,7 +43,8 @@ function createDb(){
             let name = String.fromCharCode(65+col)+(row+1)+"";
             let cellObj = {
                 name: name,
-                value: ""
+                value: "",
+                formula: ""
             };
             rowArr.push(cellObj);
         }

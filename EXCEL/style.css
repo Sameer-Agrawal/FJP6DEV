@@ -88,3 +88,10 @@
     top: 30px;
     left: 35px;
 }
+
+.address{
+    height: 30px;
+    width: 60px;
+    font-size: large;
+    text-align: center;
+}
