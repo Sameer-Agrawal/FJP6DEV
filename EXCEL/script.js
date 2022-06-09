@@ -40,6 +40,20 @@ for(let i=0;i<allCells.length;i++){
         console.log("After UPdate",cellObject);
         updateChildren(cellObject);
     })
+
+    allCells[i].addEventListener("keydown",function(e){
+        if(e.key == 'Backspace'){  //child
+            let cell = e.target;
+            let {rowId, colId} = getRowIdColIdFromElement(cell);
+            let cellObj = db[rowId][colId];
+            if(cellObj.formula){
+                cellObj.formula = "";    // <--
+                formulaInput.value = "";
+                cell.textContent = "";
+                removeFormula(cellObj); 
+            }
+        }
+    })
 }
 // lastSelectedCell
 
@@ -55,6 +69,7 @@ formulaInput.addEventListener("blur",function(e){
         cellObject.formula = formula;
         //update ui
         lastSelectedCell.textContent = computedValue;
+        updateChildren(cellObject);
     }
 })
 
@@ -107,8 +122,10 @@ function solveFormula(formula,selfCellObject){
             let {rowId,colId} = getRowIdColIdFromAddress(formulaComp);
             let cellObject = db[rowId][colId];
             let value = cellObject.value;
-            if(selfCellObject)
+            if(selfCellObject){
                 cellObject.children.push(selfCellObject.name);
+                selfCellObject.parent.push(cellObject.name);
+            }
             // console.log(cellObject);
             // console.log(cellObject);
             formula = formula.replace(formulaComp,value);
@@ -117,4 +134,17 @@ function solveFormula(formula,selfCellObject){
     //formula -> 2 * 3 + 4 - 3
     let computedValue = eval(formula);
     return computedValue;
+}
+
+function removeFormula(cellObject){
+    for(let i=0; i<cellObject.parent.length; i++){
+        let parentName = cellObject.parent[i];
+        let {rowId,colId} = getRowIdColIdFromAddress(parentName);
+        let parentCellObject = db[rowId][colId];
+        let updatedChildren = parentCellObject.children.filter(function(child) {
+            return child != cellObject.name;
+        })
+        parentCellObject.children = updatedChildren;
+    }
+    cellObject.parent = [];
 }
