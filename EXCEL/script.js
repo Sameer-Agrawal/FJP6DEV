@@ -18,7 +18,7 @@ cellsContent.addEventListener("scroll", function(e){
 
 for(let i=0; i<cells.length; i++){
     cells[i].addEventListener("click", function(e){
-        let {colId, rowId} = getRowColId(e);
+        let {colId, rowId} = getRowIdColIdFromElement(e.target);
         let address = String.fromCharCode(65+colId) + (rowId+1) +"";
         let cellObj = db[rowId][colId];
         addressInput.value = address;
@@ -29,7 +29,7 @@ for(let i=0; i<cells.length; i++){
     cells[i].addEventListener("blur", function(e){
         lastSelectedCell = e.target;
         let cellValue = e.target.textContent;
-        let {colId, rowId} = getRowColId(e);
+        let {rowId,colId} = getRowIdColIdFromElement(e.target);
         let cellObj = db[rowId][colId];
         if(cellObj.value == cellValue){
             return;
@@ -40,9 +40,9 @@ for(let i=0; i<cells.length; i++){
 
 
 formulaInput.addEventListener("blur", function(e) {
-    let formula = e.target.formula;
+    let formula = e.target.value;
     if(formula){
-        let {colId, rowId} = getRowColId(lastSelectedCell);
+        let {rowId,colId} = getRowIdColIdFromElement(lastSelectedCell);
         let cellObject = db[rowId][colId];
         let computedValue = solveFormula(formula);
         // Update db
