@@ -5,6 +5,31 @@ let allCells = document.querySelectorAll(".cell");
 let addressInput = document.querySelector("#address");
 let formulaInput = document.querySelector("#formula");
 let lastSelectedCell;
+let addSheetBtn = document.querySelector(".add-sheet");
+let sheetList = document.querySelector(".sheets-list");
+let allSheets = document.querySelectorAll(".sheet")
+let sheetId = 0;
+
+// Working on sheet functionality
+addSheetBtn.addEventListener("click", function(){
+    sheetId++;
+    let activeSheet = document.querySelector(".active-sheet");
+    activeSheet.classList.remove("active-sheet");
+    let newSheetDiv = document.createElement("div");
+    newSheetDiv.classList.add("sheet");
+    newSheetDiv.classList.add("active-sheet");
+    newSheetDiv.setAttribute("sheetId",sheetId);
+    newSheetDiv.innerText = `Sheet ${sheetId+1}`;
+    sheetList.appendChild (newSheetDiv);
+})
+
+for(let i=0; i<allSheets.length; i++){
+    allSheets[i].addEventListener("click", function(){
+        let lastActiveSheet = document.querySelector(".active-sheet");
+        lastActiveSheet.classList.remove("active-sheet");
+        allSheets[i].classList.add("active-sheet");
+    })
+}
 
 cellsContentDiv.addEventListener("scroll",function(e){
     let scrollFromTop = e.target.scrollTop;
