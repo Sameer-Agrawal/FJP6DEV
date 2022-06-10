@@ -19,12 +19,12 @@
 
 .address-content{
     /* border: 0.5px solid; */
-    height: 20px;
+    height: 20px; 
     display: flex;
 }
 
 .cells-content{
-    height:85vh;
+    height: calc(100vh - 80px);
     background-color: white;
     overflow: auto;
     position: relative;
@@ -33,6 +33,8 @@
 .sheets{
     border: 0.5px solid;
     height: 30px;
+    display: flex;
+    background-color: var(--cell-background);
 }
 
 .row{
@@ -113,4 +115,34 @@
     width: 100%;
     padding: 5px;
     border-left: 0.1px solid var(--variable-name);
+}
+
+.sheets-list{
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+.sheet{
+    border-right: 0.1px solid var(--variable-name);
+    width: 90px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.add-sheet{
+    width: 30px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-right: 0.1px solid var(--variable-name);
+}
+
+.active-sheet{
+    background-color: white;
+    font-weight: bold;
 }
