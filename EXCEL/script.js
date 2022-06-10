@@ -9,6 +9,8 @@ let addSheetBtn = document.querySelector(".add-sheet");
 let sheetList = document.querySelector(".sheets-list");
 let allSheets;
 let sheetId = 0;
+let firstSheet = document.querySelector(".sheet");
+sheetListner(firstSheet);
 
 // Working on sheet functionality
 addSheetBtn.addEventListener("click", function(){
@@ -21,16 +23,45 @@ addSheetBtn.addEventListener("click", function(){
     newSheetDiv.setAttribute("sheetId",sheetId);
     newSheetDiv.innerText = `Sheet ${sheetId+1}`;
     sheetList.appendChild (newSheetDiv);
+    initUi();
+    initDb();
     // toggle functionality on sheet selection
-    allSheets = document.querySelectorAll(".sheet")
-    for(let i=0; i<allSheets.length; i++){
-        allSheets[i].addEventListener("click", function(){
+    sheetListner(newSheetDiv);
+})
+
+function sheetListner(sheet){
+        sheet.addEventListener("click", function(){
+            if(sheet.classList.contains("active-sheet")){
+                return;
+            }
             let lastActiveSheet = document.querySelector(".active-sheet");
             lastActiveSheet.classList.remove("active-sheet");
-            allSheets[i].classList.add("active-sheet");
+            initUi();
+            sheet.classList.add("active-sheet");
+            let sheetId = sheet.getAttribute("sheetId");
+            db = sheetsDb[sheetId];
+            setUi();
         })
+}
+
+function setUi(){
+    for(let i=0;i<100;i++){
+        for(let j=0;j<26;j++){
+            let cell = document.querySelector(`div[rowid="${i}"][colid="${j}"]`);
+            let cellObject = db[i][j];
+            cell.innerHTML = cellObject.value;
+        }
     }
-})
+}
+
+function initUi(){
+    for(let i=0;i<100;i++){
+        for(let j=0;j<26;j++){
+            let cell = document.querySelector(`div[rowid="${i}"][colid="${j}"]`);
+            cell.innerHTML = "";
+        }
+    }
+}
 
 cellsContentDiv.addEventListener("scroll",function(e){
     let scrollFromTop = e.target.scrollTop;
