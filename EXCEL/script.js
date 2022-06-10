@@ -7,7 +7,7 @@ let formulaInput = document.querySelector("#formula");
 let lastSelectedCell;
 let addSheetBtn = document.querySelector(".add-sheet");
 let sheetList = document.querySelector(".sheets-list");
-let allSheets = document.querySelectorAll(".sheet")
+let allSheets;
 let sheetId = 0;
 
 // Working on sheet functionality
@@ -21,15 +21,16 @@ addSheetBtn.addEventListener("click", function(){
     newSheetDiv.setAttribute("sheetId",sheetId);
     newSheetDiv.innerText = `Sheet ${sheetId+1}`;
     sheetList.appendChild (newSheetDiv);
+    // toggle functionality on sheet selection
+    allSheets = document.querySelectorAll(".sheet")
+    for(let i=0; i<allSheets.length; i++){
+        allSheets[i].addEventListener("click", function(){
+            let lastActiveSheet = document.querySelector(".active-sheet");
+            lastActiveSheet.classList.remove("active-sheet");
+            allSheets[i].classList.add("active-sheet");
+        })
+    }
 })
-
-for(let i=0; i<allSheets.length; i++){
-    allSheets[i].addEventListener("click", function(){
-        let lastActiveSheet = document.querySelector(".active-sheet");
-        lastActiveSheet.classList.remove("active-sheet");
-        allSheets[i].classList.add("active-sheet");
-    })
-}
 
 cellsContentDiv.addEventListener("scroll",function(e){
     let scrollFromTop = e.target.scrollTop;
