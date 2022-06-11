@@ -33,6 +33,7 @@ initCells();
 
 let sheetsDb = [];
 let db;
+let visitedCells;
 
 function initDb(){
     newSheetDb = [];
@@ -45,14 +46,16 @@ function initDb(){
                 value:"",
                 formula:"",
                 children:[],
-                parent: []
+                parent: [],
+                visited: false
             }
             row.push(cellObject);
         }
         newSheetDb.push(row);
     }
     db = newSheetDb;
-    sheetsDb.push(newSheetDb);
+    visitedCells = [];
+    sheetsDb.push({db:newSheetDb, visitedCells: visitedCells});
     // console.log(sheetsDb);
 }
 initDb();
