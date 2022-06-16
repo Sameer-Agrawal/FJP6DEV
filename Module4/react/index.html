@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React</title>
+    <!-- In order to use react we have to inherit certain dependancies -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root">
+
+    </div>
+</body>
+<script type="text/babel">
+    // Here we rendered the element on dom using basic html, css, and js
+    // But there are certain limitations in it 
+    // let element = document.createElement("h1");
+    // element.innerText = "Hello Coders";
+    let parentDiv = document.querySelector("#root");
+    // parentDiv.appendChild(element);
+
+    // To overcome the limitations we use react
+    // To create an element in react 
+    // let element = React.createElement("h1",{
+    //     // There are certain properties we have to pass in this object to achieve our respective tasks
+    //     children: ['Hello Coders'] //This property will set the inner text of div element
+    // });
+    // ReactDOM.render(element,parentDiv);
+
+    // But the main issue with above syntax is that, it is not readable enough so we will use jsx ->> javascript+html
+    function Element(){
+        return(
+            <h1>Hello Coders</h1>
+        )
+    }
+    ReactDOM.render(<Element/>,parentDiv);
+    // As Browser only understand js, we have to import babel, which inturn will convert JSX into Javascript
+</script>
+</html>

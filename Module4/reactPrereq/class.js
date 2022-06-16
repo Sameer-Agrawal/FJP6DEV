@@ -8,7 +8,7 @@ class Person{
     }
 }
 
-class Student extends Person{
+class Student extends Person{  // Student is the child of person
     constructor(name,age,cgpa){
         super(name,age);   // this is calling its parents constructor to inherit the properties
         this.cgpa = cgpa
