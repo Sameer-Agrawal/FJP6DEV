@@ -20,15 +20,37 @@
     class Counter extends React.Component{
         constructor(){
             super();
+            this.state = {  // State is used to store an information about a component
+                count : 0,
+            };
+        }
+        
+        increment = () => {
+            // In react to change the state of the component we have to use setState function
+            this.setState({
+                count : this.state.count + 1,
+            })
+        }
+
+        decrement = () => {
+            // In react to change the state of the component we have to use setState function
+            this.setState({
+                count : this.state.count - 1,
+            })
         }
 
         render(){
             return(
-                <h1>Hello World</h1>
+                <div>
+                    <h1>{this.state.count}</h1>
+                    <button onClick = {this.increment}>+</button>
+                    <button onClick = {this.decrement}>-</button>
+                </div>
             )
         }
     }
 
     ReactDOM.render(<Counter/>,document.querySelector("#root"))
+    // State ek object hota hai jisme wo information hoti hai jo hum component mai use kar rahe hote haiii
 </script>
 </html>
