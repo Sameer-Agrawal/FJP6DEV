@@ -37,7 +37,18 @@
             <h1>Hello Coders</h1>
         )
     }
-    ReactDOM.render(<Element/>,parentDiv);
+    ReactDOM.render(<Parent/>,parentDiv);
     // As Browser only understand js, we have to import babel, which inturn will convert JSX into Javascript
+
+    // We know that we can reuse a component again and again in the same code or in a complete different code
+    function Parent(){
+        return(
+            <div>
+                <Element/>
+                <Element/>
+                <Element/>
+            </div>
+        )
+    }
 </script>
 </html>
