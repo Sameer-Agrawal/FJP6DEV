@@ -32,9 +32,9 @@
     // ReactDOM.render(element,parentDiv);
 
     // But the main issue with above syntax is that, it is not readable enough so we will use jsx ->> javascript+html
-    function Element(){
+    function Element({name}){  // object destructuring
         return(
-            <h1>Hello Coders</h1>
+            <h1>Hello Coders {name}</h1>
         )
     }
     ReactDOM.render(<Parent/>,parentDiv);
@@ -44,11 +44,14 @@
     function Parent(){
         return(
             <div>
-                <Element/>
+                <Element name="Sameer Here!"/>
                 <Element/>
                 <Element/>
             </div>
         )
     }
+    // To dynamically alot value in the components we use props
+    // Prop is an object which contains the value we pass
+    // Prop helps to make a component dynamic and increases its scope of usage
 </script>
 </html>
